@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Myanmar Kubernetes User Group</title>
+    <link>https://mm-k8s-ug.github.io/post/</link>
+    <description>Recent content in Posts on Myanmar Kubernetes User Group</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>All rights reserved - 2019</copyright>
+    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mm-k8s-ug.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Replication Controller</title>
+      <link>https://mm-k8s-ug.github.io/post/2019/12/22/rc/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mm-k8s-ug.github.io/post/2019/12/22/rc/</guid>
+      <description>Replication Controller ဆိုသည်မှာ Kubernetes ရဲ့ basic ကျတဲ့၊ ရှေးကျတဲ့ resource (top-level resource) တစ်ခုပါ။ ဟိုနေ့က ပြောခဲ့တဲ့ K8s Cluster architecture ထဲက Master Node မှာ ရှိတဲ့ Controller Manager ထဲမှာ ပါဝင်တဲ့ Controller တစ်ခု ဖြစ်ပါတယ်။ လက်ရှိမှာ သူရဲ့ API version ကတော့ v1 ဖြစ်ပြီး kubernetes မှာ လူတွေ သိပ်မသုံးကျတော့ပါဘူး။ ReplicationController ရဲ့ rolling update (the process of updating an application) ပြု လုပ်ခြင်း အပိုင်းနဲ့ တချို့ အပိုင်းတွေမှာ လိုအပ်ချက် တချို့ ရှိသည့် အတွက် အနာဂတ်မှာ deprecated ဖြစ်ဖို့ အနေထားမှာ ရှိပါတယ်။ ReplicationController ထက် higher level ဖြစ်တဲ့ Deployment လို့ ခေါ်တဲ့ resource အသစ် တစ်ခုကို kubernetes ရဲ့ version 1.</description>
+    </item>
+    
+    <item>
+      <title>Labels and Selectors</title>
+      <link>https://mm-k8s-ug.github.io/post/2019/12/18/labels-selectors/</link>
+      <pubDate>Wed, 18 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mm-k8s-ug.github.io/post/2019/12/18/labels-selectors/</guid>
+      <description>Kubernetes မှာ တော်တော်အသုံးများတဲ့ labels နဲ့ selectors အကြောင်းဆွေးနွေးပေးချင်ပါတယ်
+အရင်ဆုံး labels နဲ့ selectors ဆိုတာ ဘာလဲ ဘာကြောင့်သုံးရသလဲဆိုတာ မပြောခင် ကျွန်တော်တို့ Marketplace တစ်ခုသွားရအောင်
+ကျွန်တော်တို့ ဝယ်ချင်တဲ့ မျိုးမတူတဲ့ပစ္စည်းတွေကို ဆိုင်မှာသွားဝယ်ကြတဲ့အခါ ဆိုင်ထဲမှာ သက်ဆိုင်ရာ products အလိုက် ( Fast foods, Drinks, Frozen foods, Cosmetic, Medicines စသဖြင့် ) category ခွဲပေးထားတဲ့အတွက် တစ်စုတစီးတည်း အမျိုးအမည်တူတွေကို အလွယ်တကူ ရှာဖွေလို့ရပါတယ်။ ဝယ်ယူလိုက်တဲ့ ပစ္စည်းတွေကို cashier မှာရှင်းရတဲ့အခါ ပစ္စည်းတစ်ခုစီတိုင်းမှာရှိတဲ့ barcode ကို scan ဖတ်လိုက်ရုံဖြင့် စျေးနှုန်းသိရတဲ့အပြင် ထိုပစ္စည်းအမျိုးအစား လက်ကျန်ကိုပါ ဆိုင်ကသိရတယ်။
+ဒါဖြင့်ရင် ကျွန်တော်တို့ သိရှိပီးထားသည့်အတိုင်း labels ဆိုတာကတော့ products တွေကို category ခွဲပေးထားတာနဲ့တူသည့်အပြင် item တစ်ခုချင်းစီမှာရှိတဲ့ barcode label နဲ့တူပါတယ်။
+ဒီ ပစ္စည်းတွေကို သက်ဆိုင်ရာ label အလိုက် ဆွဲထုတ်ပီး လိုအပ်သလို အသုံးပြုတာက selector ဖြစ်ပါတယ်။</description>
+    </item>
+    
+    <item>
+      <title>Creating Pods</title>
+      <link>https://mm-k8s-ug.github.io/post/2019/11/22/creating-pods/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mm-k8s-ug.github.io/post/2019/11/22/creating-pods/</guid>
+      <description>Pods နဲ့ တခြား kubernetes resources တွေကို json သို့မဟုတ် YAML manifest တွေနဲ့ Kubernetes REST API endpoint သို့ post လုပ်ပြီး ဖန်တီးလို့ရနိုင်ပါတယ်။ နောက်တခြား နည်းလမ်းတစ်ခုကတော့ ရိုးရှင်းတဲ့ kubectl run command နဲ့ create လုပ်လို့ရနိုင်ပါတယ်။ kubectl command က အတော်အများ အသုံးဝင် ပေမယ့် တချို့ properties တွေကိုတော့ လုပ်လို့မရပါဘူး၊ limitation တွေ ရှိပါတယ် သို့သော်များလဲ cluster administrator တစ်ယောက် အနေနဲ့ နေ့စဉ် အမြဲ ထိတွေ့နေရတဲ့ အရေးပါတဲ့ နေရာမှာ ရှိပါတယ်။ pod manifest မှာ ဘာတွေ ပါဝင်နိုင်သလဲ ? Pod ရဲ့ အဓိက manifest ကတော့ အပိုင်း ၄ခု ပါဝင်ပါတယ်။ manifest တိုင်းမှာ ပထမဦးစွာ မပါမဖြစ်ပါဝင်တာကတော့ K8s ရဲ့ API version တွေပါ။ API version ဆိုတာ ကတော့ k8s မှာ pod သို့မဟုတ် တခြားသော resource တွေ ကို ဖန်းတီးတဲ့ အခါ မတူညီတဲ့ versions (stable/ Beta/ Alpha) တွေရဲ့ feature တွေကို ကိုယ်ဘာတွေ သုံးချင်လဲ အပေါ်မှာ မူတည်ပြီ ထည့်လို့ရနိုင်ပါတယ်။ ယေဘုယျ အားဖြင့်တော့ ကျွန်တော်တို့တွေ က stable တွေကို သုံးကြပါတယ်၊ stable ကတော့ vX (eg.</description>
+    </item>
+    
+    <item>
+      <title>pods</title>
+      <link>https://mm-k8s-ug.github.io/post/2019/11/22/pods/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mm-k8s-ug.github.io/post/2019/11/22/pods/</guid>
+      <description>Pod ဆိုသည်မှာ kubernetes cluster တွင် အသေးငယ်ဆုံးသော deployable units ဖြစ်ပါတယ်။ kubernetes မှာ container တစ်ခုချင်းစီ deploy မလုပ်ဘဲ pod အနေနဲ့သာလျှင် operate လုပ်တယ် deploy လုပ်ကြပါတယ်။ ပြီတော့ pod သည် တစ်ခု၊ တစ်ခုထက် ပိုတဲ့ containers တွေ တနေရာထဲမှာ စုပေါင်းထားတဲ့ အုပ်စု(co-located group လိုမျိုး) တခု ဖြစ်ပြီး kuberntes ရဲ့ basic အကျဆုံး object လဲ ဖြစ်တယ်။ pod တစ်ခုထဲမှာ တစ်ခု သို့မဟုတ် တခုထက် ပိုတဲ့ containers တွေ ပါဝင်နိုင်ပါတယ်။ container တခု ထက် ပိုပါဝင်တဲ့ pod တွေကတော့ kubernetes cluster ရဲ့ နှစ်ခု သို့မဟုတ် နှစ်ခုထက်ပိုတဲ့ node တွေ အပေါ်မှာ ဘယ်တော့မှ မတည်ဆောက်ကြပါဘူး။ pod တွေ ဟာ သီးသန့် ip, hostname, processes အစ ရှိတာတွေ ပါဝင်တဲ့ သီခြား logical machine တွေလို ဖြစ်ပါတယ်။</description>
+    </item>
+    
+    <item>
+      <title>K8s Cluster Achitecture အကြမ်းဖျင်း </title>
+      <link>https://mm-k8s-ug.github.io/post/2019/11/02/k8s-cluster-arch/</link>
+      <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mm-k8s-ug.github.io/post/2019/11/02/k8s-cluster-arch/</guid>
+      <description>Computer cluster - a group of loosely coupled computers that work together(wiki). cluster ဆိုသည်မှာ အကြမ်းဖျင်း ပြောရရင် အလုပ်တွေကို အတူတကွ တွဲလုပ်ဖို့ physical machine သို့ မဟုတ် VM စတဲ့ ကွန်ပျူတာ အစုအဝေး တစ်ခု ဖြစ်တယ်။ cluster တွေမှာ ယေဘုယျ အားဖြင့် master ရယ်၊ minion တွေ ရယ် ဆိုပြီး ရှိကြတယ်။ Kubernetes cluster တွင်လဲ ထိုနည်းတူ master node ရယ် worker node(minion) တွေ ပါဝင်ကြပါတယ် တချို့ကြတော့လည်း လိုအပ်ချက် အပေါ် မူတည်ပြီ infra node ဆိုပြီး ထပ်ခွဲအသုံး ပြုကြပါသေးတယ်။ အဲတော့ master node ဆိုတာ ဘာလဲ ဘာ components တွေ ပါဝင်သလဲ ? worker node ဆိုတာ ဘာလဲ ဘာ components တွေပါဝင်သလဲ ?</description>
+    </item>
+    
+  </channel>
+</rss>
