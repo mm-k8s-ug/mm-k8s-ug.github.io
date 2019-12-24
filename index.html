@@ -17,7 +17,7 @@
      Myanmar Kubernetes User Group
   </title>
 
-    <meta name="description" content="this is my description" />
+    <meta name="description" content="" />
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,7 +64,7 @@
             <h1 class="page-title">
               <a class="btn-bootstrap-2 title-scroll" href="#content">Myanmar Kubernetes User Group</a>
           </h1>
-          <h2 class="page-description">this is my description</h2>
+          <h2 class="page-description"></h2>
         </div>
 </div>
     <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
@@ -81,11 +81,88 @@
     <div class="extra-pagination inner">
         <nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 1</span>
+	<span class="page-number">Page 1 of 2</span>
+	
+	    <a class="older-posts" href="https://mm-k8s-ug.github.io/page/2/">Older Posts &rarr;</a>
 	
 </nav>
 
     </div>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/12/24/rs/">ReplicaSet</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <!-- raw HTML omitted -->
+<pre><code>                        +--------------+
+                        | ReplicaSet   |
+                        +--------------+
+                              |
+               _______________|_________________
+               |              |                |
+               |              |                |
+          +----|-----+  +-----|----+    +------|----+
+          |   pod    |  |   pod    |    |     pod   |
+          +----------+  +----------+    +-----------+
+        {  app=hola      app=hola          app=hola  }== lablel
+</code></pre><p>ReplicaSet ဆိုသည်မှာ k8s ရဲ့ pods တွေကို manage လုပ်တဲ့ controller တစ်ခုပါပဲ။ ReplicaSet က ReplicationController ရဲ့ next generation ပါ။ ReplicaSet ရဲ့ အလုပ်လုပ် ပုံတွေကတော့ ReplicationController ရဲ့ အလုပ်လုပ်ပုံနဲ့ အတိအကျ နည်းပါး အတူတူပါပဲ။ ဒါဆို ဘာတွေ ကွာခြားသလဲ ReplicationController နဲ့ ReplicaSet ? တကယ်က ကွာခြားတာ မဟုတ်ပါဘူး ReplicationController ရဲ့ selector က pod တွေကို တိကျတဲ့ label (key=value) နဲ့ သာလျှင် match  လုပ်လို့ ရပြီး ReplicaSet ကတော့ ReplicationController ရဲ့  selector ထက်  advance ဖြစ်တဲ့ <strong>matchLabels</strong> / <strong>matchExpressions</strong> တွေကို အသုံးပြုပြီး pod တွေကို match လုပ်နိုင်တဲ့ အားသာချက်ပဲ ဖြစ်ပါတယ်။ ပြောရမယ် ဆိုရင်တော့ ReplicaSet မှာ ပိုပြီး effective ဖြစ်တဲ့ ကြွယ်ဝတဲ့ selector ရှိနေတာ ဖြစ်ပါတယ်။ ဘယ်လို effective ဖြစ်တာလဲ  ? ဥပမာ env=dev နဲ့ env=qa label ရှိတဲ့ pods တွေကို တချိန်ထဲမှာ တပြိုင်နက်တည်း ReplicationController ရဲ့ selector က match မလုပ်ပေးနိုင်ပါဘူး။ ဒါပေမဲ့ ReplicaSet ကတော့ တိကျတဲ့ label တွေ မပါဘဲ (သို့)  label ရဲ့ value တွေကို အတိအကျ မသုံး မပြုဘဲ match ပြုလုပ်နိုင် ပါတယ်။ ဥပမာ env=* ကဲ့သို့  env key ပါသည့် pod အားလုံး (သို့)  env!=* ကဲ့သို့ label တွင် env key မှလွဲ၍ ကျန်သည့် pod များ အားလုံး အစ ရှိ သဖြင့် match လုပ် လို့ ရနိုင်ပါသည်။
+ReplicaSet Resource ကို yaml manifest ရေးသား ပြီး ReplicaSet Object များ ကို တိုက်ရိုက် တည်ဆောက် အသုံးပြုနိုင်သော်လည်း များသော အားဖြင့် သူချည်းဘဲ အသုံးပြုလေ့ မရှိပေ။  Deployment ဟု ခေါ်သော Deployment Controller မှ တဆင့် ReplicaSet ကို ဖန်တီး တည်ဆောက် အသုံး ပြုကြသည်။</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: hola
+spec:
+  replicas: <span style="color:#ae81ff">3</span>
+  selector:
+    matchLabels:  <span style="color:#75715e"># RC တွင် အသုံပြု၍မရပါ။</span>
+      app: hola
+  template:
+    metadata:
+      labels:
+        app: hola
+    spec:
+      containers:
+      - name: hola
+        image: quay.io/dther/hola
+</code></pre></div><p>ဒါ ကတော့ ReplicaSet ရဲ့ manifest sample ဖြစ်ပါတယ်။  Selector section မှလွဲ ၍ ကျန်တာ ReplicationController နှင့် မထူးမခြားနားပင် ဖြစ်သည်။ <strong>matchExpressions</strong> ဖြင့်လဲ expression များကို အသုံးပြုနိုင်သည်။ expression ဖြင့် အသုံးပြုပါက မဖြစ်မနေ key တစ်ခု၊ operator တစ်ခု နဲ့ ဖြစ်နိုင်ခြေ ရှိတဲ့  value အများကြီးကို list လုပ်ပြီး အသုံးပြုနိုင်ပါသည်။ operator ဆိုတာကတော့ ကျွန်တော် နားလည် သလောက် filter လုပ်တာနဲ့ တူပါတယ်။ လက်ရှိတွင် သိသလောက် စုစု ပေါင်း operator ၄ ခု ရှိပါတယ်။</p>
+<ul>
+<li><strong>In</strong> -  selector.matchExpressions ထဲမှာ ရှိတဲ့ values တွေထဲက တစ်ခုနဲ့  pod ရဲ့ label ရဲ့ value နဲ့ မဖြစ်မနေ တူညီရပါမယ်။</li>
+<li><strong>NotIn</strong> - အပေါ်က <strong>In</strong> ရဲ့ ပြောင်းပြန် ဖြစ်ပါတယ်။ selector.matchExpressions ထဲမှာ ရှိတဲ့ values တွေထဲက တစ်ခုနဲ့  pod ရဲ့ label ရဲ့ value နဲ့ လုံး၀ မတူညီရပါဘူး။</li>
+<li><strong>Exists</strong> - ဒါကို သုံးမယ် ဆိုရင်တော့ selector.matchExpressions ထဲက values field ကို သေချာ ထည့် မလိုအပ်ပါဘူး။   key အပေါ်မူတည်ပြီ match လုပ်ခြင်းဖြစ်ပါတယ်။</li>
+<li><strong>DoesNotExist</strong> - အပေါ်က <strong>Exists</strong> ရဲ့ ပြောင်းပြန် ဖြစ်ပါတယ်။ selector.matchExpressions ထဲက key field နဲ့ values field (value တမျိုးနဲ့ match မလုပ်ပေးပါဘူး) နှစ်ခုစလုံး မတူညီတဲ့ pod ရဲ့ label ကို ရွေးတဲ့ အခါ သုံးပါတယ်။</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e">## pod ရဲ့ label တွင် app=holo ရှိသမျှကို match မဖြစ်မနေ လုပ်ပေးသွားမှာပါ။</span>
+selector:
+  matchExpressions:
+    - key: app
+      operator: In  <span style="color:#75715e">## ဒီနေရာမှာ NotIn ဆိုရင်တော့ app=holo မှ လွဲ၍ ကျန်သော app=hello,</span>
+      values:       <span style="color:#75715e">## app=hi, app=* တွေကို select လုပ်သွားမှာပါ။</span>
+        - hola   
+</code></pre></div><pre><code>Reference:                                                                                                                                                    
+- https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+- kubernetes in action book
+</code></pre>
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+        
+        
+            D Ther
+        
+        
+        <time class="post-date" datetime="2019-12-24T00:00:00Z">
+            24 Dec 2019
+        </time>
+    </footer>
+</article>
 
     
         
@@ -440,64 +517,12 @@ $ kubectl explain pod.spec <span style="color:#75715e">#### detail    အသု�
 </article>
 
     
-        
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/11/02/k8s-cluster-arch/">K8s Cluster Achitecture အကြမ်းဖျင်း </a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/k8s-cluster-arch00.png" alt="pods"></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><strong>Computer cluster - a group of loosely coupled computers that work together(wiki)</strong>. cluster ဆိုသည်မှာ အကြမ်းဖျင်း ပြောရရင် အလုပ်တွေကို အတူတကွ တွဲလုပ်ဖို့ physical machine သို့ မဟုတ် VM စတဲ့ ကွန်ပျူတာ အစုအဝေး တစ်ခု ဖြစ်တယ်။ cluster တွေမှာ ယေဘုယျ အားဖြင့် master ရယ်၊ minion တွေ ရယ် ဆိုပြီး ရှိကြတယ်။ Kubernetes cluster တွင်လဲ ထိုနည်းတူ master node ရယ် worker node(minion) တွေ ပါဝင်ကြပါတယ် တချို့ကြတော့လည်း လိုအပ်ချက် အပေါ် မူတည်ပြီ infra node ဆိုပြီး ထပ်ခွဲအသုံး ပြုကြပါသေးတယ်။ အဲတော့ master node ဆိုတာ ဘာလဲ ဘာ components တွေ ပါဝင်သလဲ ? worker node ဆိုတာ ဘာလဲ ဘာ components တွေပါဝင်သလဲ ? ရိုးရိုးရှင်းရှင်းပြောရရင် တော့ master node က kubernetes system ရဲ့ Control Plane ဖြစ်ပြီး cluster တစ်ခုလုံးကို control နဲ့ manage လုပ်ပေးပါတယ်။ worker node ကတော့ ကျွန်တော်တို့ လိုချင်တဲ့ တကယ် applications တွေ ကို worker node အပေါ်မှာ deploy လုပ်ကြပါတယ်။</p>
-<h2 id="master-control-plane----components---------">Master (Control Plane) မှာ အကြမ်းဖျင်း အဓိက components ၄ ခု က မပါမဖြစ် ပါဝင်ပြီး အရေးကြီးပါတယ်။ ဒါတွေကတော့ -</h2>
-<ul>
-<li><strong>API Server</strong> - API server ကတော့ cluster အတွင်း(master/worker) ထဲမှာ ရှိတဲ့ components တွေ နဲ့ k8s cluster client တွေ ကြား အဓိက ဆက်သွယ်ပေးတဲ့ components တစ်ခုဖြစ်ပါတယ်။ အလွယ် ပြောရရင်တော့ communication လုပ်ပေးတဲ့ အရာပေါ့။</li>
-<li><strong>Controller Manager</strong> - ဒါကတော့ controllers တွေ များစွာ ပါဝင်ပြီ cluster level အလုပ်တွေ functions တွေကို လုပ်ပါတယ်။ ဘာတွေလုပ်သလဲ ဆိုရင်တော့ အကြမ်းဖျင်း ပြောရရင် replication အလုပ်တွေ၊ worker nodes တွေရဲ့ အခြေနေ စောင့်ကြည့်တာတွေ၊ ဘယ် worker nodes က failures ဖြစ်သွားတဲ့ အခြေနေမျိုးကို ကိုင်တွယ် ဖြေရှင်းခြင်း အစရှိတဲ့ အလုပ်တွေကို လုပ်ပေးပါတယ်။</li>
-<li><strong>Scheduler</strong> - ဒါကတော့ application တွေကို deploy လုပ်တဲ့ အခါ ဘယ် worker တွေ အပေါ်ကို သွားပြီး deploy လုပ်ရမယ် သို့မဟုတ် ဘယ် worker node တွေက deploy လုပ်မယ့် application တွေ အတွက် သင့်လျော်တယ်ဆိုတာမျိုးကို ပြုလုပ်ပေးတဲ့ အရာ မျိုးပေါ့။ သူ့ အလုပ်ကတော့ အလွယ်တကူမှတ်ရင် assign ချတာ၊ နေရာ ချရတာနဲ့ တူတယ်။</li>
-<li><strong>etcd</strong> - သူကတော့ k8s cluster ကြီး တစ်ခုလုံးရဲ့ configuration တွေ ကို persistently စိတ်ချစွာ (distributed) သိုလှောင်းထားတဲ့ အရာ ဖြစ်ပါတယ်။ ဥပမာ k8s cluster က application ဆိုရင် သူက အဲ့ application ရဲ့ backend database လိုမျိုးပေါ့။</li>
-</ul>
-<h2 id="worker-node-minion-----components-------">Worker node (minion) မှာ အကြမ်းဖျင်း အဓိက အရေးကြီးတဲ့ components ၃ ခု မဖြစ်မနေ ပါဝင်ပါတယ်။ ဒါတွေကတော့ -</h2>
-<ul>
-<li>
-<p><strong>Container runtime</strong> - ဒါကတော့ node အပေါ်မှာ applications တွေကို container image ကနေ container အနေနဲ့ တကယ် run မဲ့ container runtime ဖြစ်ပါတယ်၊ ဥပမာ docker, rkt, containerd အစ ရှိတာတွေဖြစ်ပါတယ်။</p>
-</li>
-<li>
-<p><strong>Kubelet</strong> - kubelet က master node မှာ ရှိတဲ့ api server နဲ့ ဆက်သွယ်ပြီး node အပေါ် container တွေကို ဘယ်လို run မည်ကို manages လုပ်ပေးပါတယ်။ အလွယ်ပြောရရင်တော့ docker တို့ rkt တို့ကို api ကနေ container ကို ဘယ်လို run ပါဆိုပြီ api server က လာသည့် အမိန့်အတိုင်း ပြန် ခိုင်းပေးတဲ့ အကောင်နဲ့ တူတယ်။</p>
-</li>
-<li>
-<p><strong>Kube-proxy</strong> - သူကတော့ deploy လုပ်လိုက်တဲ့ applications တွေရဲ့ network traffic တွေကို ကိုင်တွယ်ပေးတဲ့ အရာ၊ load-balances လုပ်ပေးတဲ့ အရာ ဖြစ်တယ်။</p>
-<p>ဒါတွေက တော့ k8s cluster ရဲ့ architecture အကြမ်းဖျင်း ဖြစ်တယ်။</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/k8s-cluster-arch01.jpg" alt="pods1"></p>
-<pre><code>Reference: - https://kubernetes.io/docs/
-           - kubernetes in action book
-</code></pre>
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-        
-        
-            D Ther
-        
-        
-        <time class="post-date" datetime="2019-11-02T00:00:00Z">
-            2 Nov 2019
-        </time>
-    </footer>
-</article>
-
-    
 
     <nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 1</span>
+	<span class="page-number">Page 1 of 2</span>
+	
+	    <a class="older-posts" href="https://mm-k8s-ug.github.io/page/2/">Older Posts &rarr;</a>
 	
 </nav>
 

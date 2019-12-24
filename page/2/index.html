@@ -5,20 +5,16 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  	<meta property="og:title" content=" K8s Cluster Achitecture အကြမ်းဖျင်း  &middot;  Myanmar Kubernetes User Group" />
+  	<meta property="og:title" content=" Myanmar Kubernetes User Group" />
   	<meta property="og:site_name" content="Myanmar Kubernetes User Group" />
-  	<meta property="og:url" content="https://mm-k8s-ug.github.io/post/2019/11/02/k8s-cluster-arch/" />
+  	<meta property="og:url" content="https://mm-k8s-ug.github.io/" />
     
     
-  	<meta property="og:type" content="article" />
-
-    <meta property="og:article:published_time" content="2019-11-02T00:00:00Z" />
-
-    
+    <meta property="og:type" content="website" />
     
 
   <title>
-     K8s Cluster Achitecture အကြမ်းဖျင်း  &middot;  Myanmar Kubernetes User Group
+     Myanmar Kubernetes User Group
   </title>
 
     <meta name="description" content="" />
@@ -35,13 +31,13 @@
 
     
       
-          <link href="https://mm-k8s-ug.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Myanmar Kubernetes User Group" />
       
+        <link href="https://mm-k8s-ug.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Myanmar Kubernetes User Group" />
       
     
     <meta name="generator" content="Hugo 0.62.0-DEV" />
 
-    <link rel="canonical" href="https://mm-k8s-ug.github.io/post/2019/11/02/k8s-cluster-arch/" />
+    <link rel="canonical" href="https://mm-k8s-ug.github.io/" />
 
      
 </head>
@@ -56,6 +52,9 @@
 
 <header class="main-header " style="background-image: url(https://mm-k8s-ug.github.io/image/user.png)">
 
+
+    
+
     <nav class="main-nav overlay clearfix">
         
         
@@ -63,7 +62,7 @@
 <div class="vertical">
         <div class="main-header-content inner">
             <h1 class="page-title">
-              <a class="btn-bootstrap-2" href="#content">Myanmar Kubernetes User Group</a>
+              <a class="btn-bootstrap-2 title-scroll" href="#content">Myanmar Kubernetes User Group</a>
           </h1>
           <h2 class="page-description"></h2>
         </div>
@@ -71,25 +70,35 @@
     <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
 </header>
 
-  <main id="content" class="content" role="main">
+<main id="content" class="content" role="main">
+    
+    
+    
+    
+    
+    
 
+    <div class="extra-pagination inner">
+        <nav class="pagination" role="navigation">
+	
+	    <a class="newer-posts" href="https://mm-k8s-ug.github.io/">&larr; Newer Posts</a>
+	
+	<span class="page-number">Page 2 of 2</span>
+	
+</nav>
 
-  <article class="post post">
+    </div>
 
+    
+        
+<article class="post post">
     <header class="post-header">
-        <h1 class="post-title">K8s Cluster Achitecture အကြမ်းဖျင်း </h1>
-        <section class="post-meta">
-        
-	<time class="post-date" datetime="2019-11-02">
-            2019-11-02
-          </time>
-        
-         
-        </section>
+        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/11/02/k8s-cluster-arch/">K8s Cluster Achitecture အကြမ်းဖျင်း </a></h2>
     </header>
-
-    <section class="post-content">
-      <p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/k8s-cluster-arch00.png" alt="pods"></p>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/k8s-cluster-arch00.png" alt="pods"></p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <p><strong>Computer cluster - a group of loosely coupled computers that work together(wiki)</strong>. cluster ဆိုသည်မှာ အကြမ်းဖျင်း ပြောရရင် အလုပ်တွေကို အတူတကွ တွဲလုပ်ဖို့ physical machine သို့ မဟုတ် VM စတဲ့ ကွန်ပျူတာ အစုအဝေး တစ်ခု ဖြစ်တယ်။ cluster တွေမှာ ယေဘုယျ အားဖြင့် master ရယ်၊ minion တွေ ရယ် ဆိုပြီး ရှိကြတယ်။ Kubernetes cluster တွင်လဲ ထိုနည်းတူ master node ရယ် worker node(minion) တွေ ပါဝင်ကြပါတယ် တချို့ကြတော့လည်း လိုအပ်ချက် အပေါ် မူတည်ပြီ infra node ဆိုပြီး ထပ်ခွဲအသုံး ပြုကြပါသေးတယ်။ အဲတော့ master node ဆိုတာ ဘာလဲ ဘာ components တွေ ပါဝင်သလဲ ? worker node ဆိုတာ ဘာလဲ ဘာ components တွေပါဝင်သလဲ ? ရိုးရိုးရှင်းရှင်းပြောရရင် တော့ master node က kubernetes system ရဲ့ Control Plane ဖြစ်ပြီး cluster တစ်ခုလုံးကို control နဲ့ manage လုပ်ပေးပါတယ်။ worker node ကတော့ ကျွန်တော်တို့ လိုချင်တဲ့ တကယ် applications တွေ ကို worker node အပေါ်မှာ deploy လုပ်ကြပါတယ်။</p>
@@ -117,30 +126,36 @@
 <pre><code>Reference: - https://kubernetes.io/docs/
            - kubernetes in action book
 </code></pre>
+          </section>
+      </p>
+      
     </section>
-
-
-  <footer class="post-footer">
-
-
-    
-
-    <section class="author">
-
-  <p></p>
-  
-
-</section>
-
-
-    
-
-    
-
-  </footer>
+    <footer class="post-meta">
+        
+        
+        
+            D Ther
+        
+        
+        <time class="post-date" datetime="2019-11-02T00:00:00Z">
+            2 Nov 2019
+        </time>
+    </footer>
 </article>
 
+    
+
+    <nav class="pagination" role="navigation">
+	
+	    <a class="newer-posts" href="https://mm-k8s-ug.github.io/">&larr; Newer Posts</a>
+	
+	<span class="page-number">Page 2 of 2</span>
+	
+</nav>
+
+
 </main>
+
     <footer class="site-footer clearfix">
         <section class="copyright"><a href="">Myanmar Kubernetes User Group</a> All rights reserved - 2019</section>
         

@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2019</copyright>
-    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mm-k8s-ug.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ReplicaSet</title>
+      <link>https://mm-k8s-ug.github.io/post/2019/12/24/rs/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mm-k8s-ug.github.io/post/2019/12/24/rs/</guid>
+      <description>+--------------+ | ReplicaSet | +--------------+ | _______________|_________________ | | | | | | +----|-----+ +-----|----+ +------|----+ | pod | | pod | | pod | +----------+ +----------+ +-----------+ { app=hola app=hola app=hola }== lablel ReplicaSet ဆိုသည်မှာ k8s ရဲ့ pods တွေကို manage လုပ်တဲ့ controller တစ်ခုပါပဲ။ ReplicaSet က ReplicationController ရဲ့ next generation ပါ။ ReplicaSet ရဲ့ အလုပ်လုပ် ပုံတွေကတော့ ReplicationController ရဲ့ အလုပ်လုပ်ပုံနဲ့ အတိအကျ နည်းပါး အတူတူပါပဲ။ ဒါဆို ဘာတွေ ကွာခြားသလဲ ReplicationController နဲ့ ReplicaSet ? တကယ်က ကွာခြားတာ မဟုတ်ပါဘူး ReplicationController ရဲ့ selector က pod တွေကို တိကျတဲ့ label (key=value) နဲ့ သာလျှင် match လုပ်လို့ ရပြီး ReplicaSet ကတော့ ReplicationController ရဲ့ selector ထက် advance ဖြစ်တဲ့ matchLabels / matchExpressions တွေကို အသုံးပြုပြီး pod တွေကို match လုပ်နိုင်တဲ့ အားသာချက်ပဲ ဖြစ်ပါတယ်။ ပြောရမယ် ဆိုရင်တော့ ReplicaSet မှာ ပိုပြီး effective ဖြစ်တဲ့ ကြွယ်ဝတဲ့ selector ရှိနေတာ ဖြစ်ပါတယ်။ ဘယ်လို effective ဖြစ်တာလဲ ?</description>
+    </item>
     
     <item>
       <title>Replication Controller</title>
