@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" Myanmar Kubernetes User Group" />
+  	<meta property="og:site_name" content="Myanmar Kubernetes User Group" />
+  	<meta property="og:url" content="https://mm-k8s-ug.github.io/" />
+    
+    
+    <meta property="og:type" content="website" />
+    
+
+  <title>
+     Myanmar Kubernetes User Group
+  </title>
+
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://mm-k8s-ug.github.io/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://mm-k8s-ug.github.io/images/apple-touch-icon.png" />
+    
+    <link rel="stylesheet" type="text/css" href="https://mm-k8s-ug.github.io/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+      
+        <link href="https://mm-k8s-ug.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Myanmar Kubernetes User Group" />
+      
+    
+    <meta name="generator" content="Hugo 0.62.0-DEV" />
+
+    <link rel="canonical" href="https://mm-k8s-ug.github.io/" />
+
+     
+</head>
+<body class="nav-closed">
+<div id="particles-js"></div>
+  
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header " style="background-image: url(https://mm-k8s-ug.github.io/image/user.png)">
+
+
+    
+
+    <nav class="main-nav overlay clearfix">
+        
+        
+    </nav>
+<div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="page-title">
+              <a class="btn-bootstrap-2 title-scroll" href="#content">Myanmar Kubernetes User Group</a>
+          </h1>
+          <h2 class="page-description"></h2>
+        </div>
+</div>
+    <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+</header>
+
+<main id="content" class="content" role="main">
+    
+    
+    
+    
+    
+    
+
+    <div class="extra-pagination inner">
+        <nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 of 2</span>
+	
+	    <a class="older-posts" href="https://mm-k8s-ug.github.io/page/2/">Older Posts &rarr;</a>
+	
+</nav>
+
+    </div>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/12/24/rs/">ReplicaSet</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <!-- raw HTML omitted -->
+<pre><code>                        +--------------+
+                        | ReplicaSet   |
+                        +--------------+
+                              |
+               _______________|_________________
+               |              |                |
+               |              |                |
+          +----|-----+  +-----|----+    +------|----+
+          |   pod    |  |   pod    |    |     pod   |
+          +----------+  +----------+    +-----------+
+        {  app=hola      app=hola          app=hola  }== lablel
+</code></pre><p>ReplicaSet ဆိုသည်မှာ k8s ရဲ့ pods တွေကို manage လုပ်တဲ့ controller တစ်ခုပါပဲ။ ReplicaSet က ReplicationController ရဲ့ next generation ပါ။ ReplicaSet ရဲ့ အလုပ်လုပ် ပုံတွေကတော့ ReplicationController ရဲ့ အလုပ်လုပ်ပုံနဲ့ အတိအကျ နည်းပါး အတူတူပါပဲ။ ဒါဆို ဘာတွေ ကွာခြားသလဲ ReplicationController နဲ့ ReplicaSet ? တကယ်က ကွာခြားတာ မဟုတ်ပါဘူး ReplicationController ရဲ့ selector က pod တွေကို တိကျတဲ့ label (key=value) နဲ့ သာလျှင် match  လုပ်လို့ ရပြီး ReplicaSet ကတော့ ReplicationController ရဲ့  selector ထက်  advance ဖြစ်တဲ့ <strong>matchLabels</strong> / <strong>matchExpressions</strong> တွေကို အသုံးပြုပြီး pod တွေကို match လုပ်နိုင်တဲ့ အားသာချက်ပဲ ဖြစ်ပါတယ်။ ပြောရမယ် ဆိုရင်တော့ ReplicaSet မှာ ပိုပြီး effective ဖြစ်တဲ့ ကြွယ်ဝတဲ့ selector ရှိနေတာ ဖြစ်ပါတယ်။ ဘယ်လို effective ဖြစ်တာလဲ  ? ဥပမာ env=dev နဲ့ env=qa label ရှိတဲ့ pods တွေကို တချိန်ထဲမှာ တပြိုင်နက်တည်း ReplicationController ရဲ့ selector က match မလုပ်ပေးနိုင်ပါဘူး။ ဒါပေမဲ့ ReplicaSet ကတော့ တိကျတဲ့ label တွေ မပါဘဲ (သို့)  label ရဲ့ value တွေကို အတိအကျ မသုံး မပြုဘဲ match ပြုလုပ်နိုင် ပါတယ်။ ဥပမာ env=* ကဲ့သို့  env key ပါသည့် pod အားလုံး (သို့)  env!=* ကဲ့သို့ label တွင် env key မှလွဲ၍ ကျန်သည့် pod များ အားလုံး အစ ရှိ သဖြင့် match လုပ် လို့ ရနိုင်ပါသည်။
+ReplicaSet Resource ကို yaml manifest ရေးသား ပြီး ReplicaSet Object များ ကို တိုက်ရိုက် တည်ဆောက် အသုံးပြုနိုင်သော်လည်း များသော အားဖြင့် သူချည်းဘဲ အသုံးပြုလေ့ မရှိပေ။  Deployment ဟု ခေါ်သော Deployment Controller မှ တဆင့် ReplicaSet ကို ဖန်တီး တည်ဆောက် အသုံး ပြုကြသည်။</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: hola
+spec:
+  replicas: <span style="color:#ae81ff">3</span>
+  selector:
+    matchLabels:  <span style="color:#75715e"># RC တွင် အသုံပြု၍မရပါ။</span>
+      app: hola
+  template:
+    metadata:
+      labels:
+        app: hola
+    spec:
+      containers:
+      - name: hola
+        image: quay.io/dther/hola
+</code></pre></div><p>ဒါ ကတော့ ReplicaSet ရဲ့ manifest sample ဖြစ်ပါတယ်။  Selector section မှလွဲ ၍ ကျန်တာ ReplicationController နှင့် မထူးမခြားနားပင် ဖြစ်သည်။ <strong>matchExpressions</strong> ဖြင့်လဲ expression များကို အသုံးပြုနိုင်သည်။ expression ဖြင့် အသုံးပြုပါက မဖြစ်မနေ key တစ်ခု၊ operator တစ်ခု နဲ့ ဖြစ်နိုင်ခြေ ရှိတဲ့  value အများကြီးကို list လုပ်ပြီး အသုံးပြုနိုင်ပါသည်။ operator ဆိုတာကတော့ ကျွန်တော် နားလည် သလောက် filter လုပ်တာနဲ့ တူပါတယ်။ လက်ရှိတွင် သိသလောက် စုစု ပေါင်း operator ၄ ခု ရှိပါတယ်။</p>
+<ul>
+<li><strong>In</strong> -  selector.matchExpressions ထဲမှာ ရှိတဲ့ values တွေထဲက တစ်ခုနဲ့  pod ရဲ့ label ရဲ့ value နဲ့ မဖြစ်မနေ တူညီရပါမယ်။</li>
+<li><strong>NotIn</strong> - အပေါ်က <strong>In</strong> ရဲ့ ပြောင်းပြန် ဖြစ်ပါတယ်။ selector.matchExpressions ထဲမှာ ရှိတဲ့ values တွေထဲက တစ်ခုနဲ့  pod ရဲ့ label ရဲ့ value နဲ့ လုံး၀ မတူညီရပါဘူး။</li>
+<li><strong>Exists</strong> - ဒါကို သုံးမယ် ဆိုရင်တော့ selector.matchExpressions ထဲက values field ကို သေချာ ထည့် မလိုအပ်ပါဘူး။   key အပေါ်မူတည်ပြီ match လုပ်ခြင်းဖြစ်ပါတယ်။</li>
+<li><strong>DoesNotExist</strong> - အပေါ်က <strong>Exists</strong> ရဲ့ ပြောင်းပြန် ဖြစ်ပါတယ်။ selector.matchExpressions ထဲက key field နဲ့ values field (value တမျိုးနဲ့ match မလုပ်ပေးပါဘူး) နှစ်ခုစလုံး မတူညီတဲ့ pod ရဲ့ label ကို ရွေးတဲ့ အခါ သုံးပါတယ်။</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e">## pod ရဲ့ label တွင် app=holo ရှိသမျှကို match မဖြစ်မနေ လုပ်ပေးသွားမှာပါ။</span>
+selector:
+  matchExpressions:
+    - key: app
+      operator: In  <span style="color:#75715e">## ဒီနေရာမှာ NotIn ဆိုရင်တော့ app=holo မှ လွဲ၍ ကျန်သော app=hello,</span>
+      values:       <span style="color:#75715e">## app=hi, app=* တွေကို select လုပ်သွားမှာပါ။</span>
+        - hola   
+</code></pre></div><pre><code>Reference:                                                                                                                                                    
+- https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+- kubernetes in action book
+</code></pre>
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+        
+        
+            D Ther
+        
+        
+        <time class="post-date" datetime="2019-12-24T00:00:00Z">
+            24 Dec 2019
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/12/22/rc/">Replication Controller</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/rc00.png" alt="rc00"></p>
+<!-- raw HTML omitted -->
+<p>Replication Controller ဆိုသည်မှာ Kubernetes ရဲ့ basic ကျတဲ့၊ ရှေးကျတဲ့ resource (top-level resource) တစ်ခုပါ။ ဟိုနေ့က ပြောခဲ့တဲ့ K8s Cluster architecture ထဲက Master Node မှာ ရှိတဲ့ Controller Manager ထဲမှာ ပါဝင်တဲ့ Controller တစ်ခု ဖြစ်ပါတယ်။ လက်ရှိမှာ သူရဲ့ API version ကတော့ v1 ဖြစ်ပြီး kubernetes မှာ လူတွေ သိပ်မသုံးကျတော့ပါဘူး။ ReplicationController ရဲ့ rolling update (the process of updating an application) ပြု လုပ်ခြင်း အပိုင်းနဲ့ တချို့ အပိုင်းတွေမှာ လိုအပ်ချက် တချို့ ရှိသည့် အတွက် အနာဂတ်မှာ deprecated ဖြစ်ဖို့ အနေထားမှာ ရှိပါတယ်။ ReplicationController ထက် higher level ဖြစ်တဲ့ Deployment လို့ ခေါ်တဲ့ resource အသစ် တစ်ခုကို kubernetes ရဲ့ version 1.2 မှာ beta အနေနဲ့ release လုပ် ပြီး ယခု အချိန်မှာ stable အနေနဲ့ အသုံးပြုနေကြပြီး ဖြစ်တယ်။ သို့ သော်လည်း openshift ရဲ့ deployment config(dc) resource ကတော့ ReplicationController ကို အသုံးပြုနေဆဲ ဖြစ်ပါတယ်။ ReplicationController ရဲ့ အဓိက အလုပ်ကတော့ pod object တွေကို ReplicationController resource မှ တစ်ဆင့် အသုံးပြုပြီ တည်ဆောက်သည့် အခါ အမြဲတမ်း မဖျက်မခြင်း up and run လုပ်ပေးနေဖို့ ဖြစ်ပါတယ်။ pod တစ်ခု running ဖြစ်နေတဲ့ worker node down သွားခြင်း၊ အကြောင်းတစုံတရာ ကြောင့် node fails ဖြစ်ခြင်း၊ (သို့) မည်သည့် အကြောင့်နှင့် မဆို pod ပျက်သွားလျှင့် ReplicationController မှ ထို ပျက်သွားသော pod များ ကို ပြန်လည်ဆောက် တည်ပေးခြင်း သို့ မဟုတ် တစ်ခြား worker node တစ်လုံး ပေါ်တွင် ပြန်လည် တည်ဆောက် ပေးသည့် အလုပ်ကို လုပ်ပါသည်။</p>
+<p>ReplicationController ရဲ႕ spec (၀ိေသသန /Characteristic) ထဲတြင္ replicas၊ selector နဲ႔ template ဆိုျပီ essential parts ၃ ခု ပါ၀င္ပါတယ္။</p>
+<ul>
+<li>replicas (replica count) run ချင် သည့် pod အရေအတွက် (desired number of pods)</li>
+<li>selector (label selector) ဘယ် pod တွေက ReplicationController ရဲ့ manage အောက်တွင် (သို့) scope ထဲတွင်  ရှိတယ် ဆိုတာ ဆုံးဖြတ်ပေးတယ်။</li>
+<li>template (pod template) ဒီထဲမွာေတာ့ pod ရဲ႕manifest ေတြ ရွိတယ္ (ကိုယ္လုိခ်င္သည့္ pod ပံုစံ)</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/rc01.jpg" alt="rc01"></p>
+<p>အပေါ်က ပုံမှာ kubia ကတော့ ReplicationController ရဲ့ object name ဖြစ်ပြီ app: kubia ကတော့ pod အတွက် pod template ထဲမှာ တပ်ပေးထားတဲ့ label ဖြစ်ပါတယ်။</p>
+<p>ReplicationController က replication ကို ဘယ်လို အလုပ်လုပ် သလဲ ? ပျက်သွားသော pod ကို ဘယ်လို ပြန်လည် တည်ဆောက်လဲ? cluster ထဲမှာ ReplicationController က pod တိုင်းကို တာဝန် မယူပါဘူး ပျက်သွားတိုင်းလည်း အသစ် ပြန် မတည်ဆောက်ပေးပါဘူး။ သူ manage လုပ်တဲ့ pod၊ သူ scope ထဲမှာ ရှိတဲ့ pod တွေ အတွက်ဘဲ သူ တာဝန် ယူပါတယ် ပျက်သွားသည့် အခါ ပြန် တည် ဆောက် ပေးပါတယ်။ ဘယ်လို ReplicationController က pod တွေကို manage လုပ်သလဲ ? ဒါကတော့ ရှင်းပါတယ် ReplicationController က Pod တွေကို label နဲ့ လုပ်ပါတယ်။ ReplicationController က သူရဲ့ spec ထဲမှာ ပါဝင်တဲ့ selector ကနေ သက်ဆိုင်ရာ label တွေ တပ်ထားတဲ့ pod တွေကို select လုပ်ပြီ manage လုပ်ပါတယ် စောင့်ကြည့်ပါတယ်။ အပေါ်က spec ထဲမှာ ပါဝင်တဲ့ replicas keyword ကတော့ replica count ပါ။ replicas ကတော့ pod အရေအတွက် ဘယ်နှစ်ခု တည်ဆောက် မည်(သို့) ဘယ်နှစ်ခု ပွားချင်းသည် (သို့) ဘယ်နှစ်ခု လိုချင်းသည်ကို သတ်မှတ် ပေးရပါတယ်။ template ကတော့ ကျွန်တော်တို့ တည်ဆောက်ချင်းတဲ့ pod ရဲ့ အသေးစိပ် အချက်အလက်တွေ ပါဝင်ပြီး ဒီ template မှ တစ်ဆင့် ပွားသုံးရန် (replica လုပ်ရန်) အတွက် ဖြစ်ပါတယ်။ vmware တို့ (သို့) တခြား virtualization တစ်ခုခု အသုံး ပြုဖူးခဲ့ရင် အဲက vm ကို template ပြုလုပ်ပြီ လိုအပ်သည့် အချိန်တိုင်း ပြန်လည် အသုံးပြုသည့် ပုံစံမျိုးနဲ့ တူပါတယ်။ အဲတော့ ReplicationController object တစ်ခုကို တည်ဆောက်ရင် ReplicationController မှ template အတိုင် pod ကို တည်ဆောက်ပေးပြီး pod အရေအတွက်ကို တော့ replicas မှာ သတ်မှတ်ထား သည့် အတိုင်း တည်ဆောက်သွား ပါတယ်။ replica count အလိုက် template မှ pod တွေ တည်ဆောက် ပြီသွားရင်တော့ ReplicationController က သူရဲ့ reconciliation(ဟိုဘက်ဒီဘက်အဆင်ပြေအောင် ထိန်းညှိ) loop အလုပ်ကို လုပ်ပါတယ်။ ဒါကတော့ replica count မှာ ပါတဲ့ pod အရေအတွက်နဲ့ လက်ရှိ run ဖြစ်နေတဲ့ pod အရေအတွက် ကို အမြဲ စောင့် ကြည့် တိုက် စစ်ပါတယ်။ အကြောင်းအမျိုးမျိုး ကြောင့် pod ပျက်သွားတဲ့ အခါမှာ replica count ထဲက အရေ အတွက် အတိုင်း တူညီတဲ့ worker node (သို့) cluster ရဲ့ အခြားသော worker node ပေါ်မှာ လက်ရှိ template ထဲက အတိုင်း ပြန်လည် တည်ဆောက်ပေးပါတယ်။</p>
+<p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/rc02.jpg" alt="rc02"></p>
+<p>ReplicationController မှ တည်ဆောက်ထားတဲ့ pod က ပျက်မသွားဘဲ label ကို ဖျက်လိုက်မယ် (သို့)label ကို ပြင်လိုက်မယ် ဆိုပါက ReplicationController သည် သူ၏ selector မှ သိသည့် label မဟုတ်တော့ သည့် အတွက် ပြောင်လဲသွားသော pod ကို ဂရုစိုက်တော့မည် မဟုတ်ဘဲ pod အသစ်ကို template ထဲက အတိုင်း replica count မှ label ဖျက်လိုက်/ပြင်လိုက် သည့် အရေအတွက် အတိုင်း ပြန်ဆောက် ပေးသွားမှာ ဖြစ်ပါတယ်။ ReplicationController ရဲ့ ကောင်းကျိုတွေကတော့ ကိုယ် တည်ဆောက်ထားတဲ့ pod တစ်ခုခုဖြစ်ပြီး down သွားမှာ တို့ကို အမြဲ လိုက် ကြည့်နေစရာ မလိုခြင်း၊ node တစ်ခုခု fail ဖြစ်သွားသည့်တိုင် အသစ် ပြန်လည်တည်ဆောက် ပေးခြင်း၊ pod scaling လုပ်ရာတွေ manual နဲ့ automatic အလွယ်တကူ ပြုလုပ်နိုင် ခြင်းဖြစ်ကြပါတယ်။ ဒါတွေကတော့ ReplicationController နဲ့ ပတ်သတ်လို့ သိသင့်သိထိုက်တဲ့ အကြောင်းအရာတွေ ဖြစ်ပါတယ်။</p>
+<p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/rc03.jpg" alt="rc03"></p>
+<pre><code>Reference: - https://kubernetes.io/docs/home/
+           - kubernetes in action book
+</code></pre>
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+        
+        
+            D Ther
+        
+        
+        <time class="post-date" datetime="2019-12-22T00:00:00Z">
+            22 Dec 2019
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/12/18/labels-selectors/">Labels and Selectors</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/label00.jpg" alt="label00"></p>
+<!-- raw HTML omitted -->
+<p>Kubernetes မှာ တော်တော်အသုံးများတဲ့ labels နဲ့ selectors အကြောင်းဆွေးနွေးပေးချင်ပါတယ်<br>
+အရင်ဆုံး labels နဲ့ selectors ဆိုတာ ဘာလဲ ဘာကြောင့်သုံးရသလဲဆိုတာ မပြောခင် ကျွန်တော်တို့ Marketplace တစ်ခုသွားရအောင်</p>
+<p>ကျွန်တော်တို့ ဝယ်ချင်တဲ့ မျိုးမတူတဲ့ပစ္စည်းတွေကို ဆိုင်မှာသွားဝယ်ကြတဲ့အခါ ဆိုင်ထဲမှာ သက်ဆိုင်ရာ products အလိုက် ( Fast foods, Drinks, Frozen foods, Cosmetic, Medicines စသဖြင့် ) category ခွဲပေးထားတဲ့အတွက် တစ်စုတစီးတည်း အမျိုးအမည်တူတွေကို အလွယ်တကူ ရှာဖွေလို့ရပါတယ်။ ဝယ်ယူလိုက်တဲ့ ပစ္စည်းတွေကို cashier မှာရှင်းရတဲ့အခါ ပစ္စည်းတစ်ခုစီတိုင်းမှာရှိတဲ့ barcode ကို scan ဖတ်လိုက်ရုံဖြင့် စျေးနှုန်းသိရတဲ့အပြင် ထိုပစ္စည်းအမျိုးအစား လက်ကျန်ကိုပါ ဆိုင်ကသိရတယ်။<br>
+ဒါဖြင့်ရင် ကျွန်တော်တို့ သိရှိပီးထားသည့်အတိုင်း labels ဆိုတာကတော့ products တွေကို category ခွဲပေးထားတာနဲ့တူသည့်အပြင် item တစ်ခုချင်းစီမှာရှိတဲ့ barcode label နဲ့တူပါတယ်။<br>
+ဒီ ပစ္စည်းတွေကို သက်ဆိုင်ရာ label အလိုက် ဆွဲထုတ်ပီး လိုအပ်သလို အသုံးပြုတာက selector ဖြစ်ပါတယ်။</p>
+<p>Labels and selectors ကို k8s မှာ ဘယ်လိုသုံးသလဲ  ?</p>
+<p>ဆိုပါစို့ microservice application တစ်ခုကို pod တစ်ခုလို့သတ်မှတ်မယ်ဆိုရင် ဒီ application နဲ့ပတ်သက်လို့ beta, canary, stable စသဖြင့် release version တွေခွဲပီး ရှိမယ်ဆိုရင် pod ၃ခု ရှိနေပြီ။ pod ၃ခုတုန်းကတော့ လွယ်သေးတယ်။ ဒီ application ကိုပဲ replica အနေနဲ့ တစ် pod စီထပ်တိုးမယ်ဆိုရင် pod ၆ခု ဖြစ်နေပီ။ Application တွေ များလာတာနဲ့အမျှ pod အရေအတွက်လဲ တိုးလာမှာဖြစ်တယ်။<br>
+ဥပမာ ကျွန်တော်တို့ architecture မှာ pod ၂၀ နီးပါး ရှိတယ်။ Replica ပွားထားတဲ့ app တွေလဲရှိမယ်။ version အမျိုးမျိုးနဲ့လဲ run နေတာလဲရှိမယ်ဆိုရင် ဘယ် pod က ဘယ် application အတွက်လဲ ဘယ် version နဲ့လဲ။ ဘယ် application ရဲ့ beta version တွေကိုပဲ feature update ထည့်ချင်တယ်။ stable version နဲ့ pod တွေပဲ list လုပ်ချင်တယ် ဘယ် application ရဲ့ ​replica pod တွေကို ဖယ်ထုတ်ချင်တယ် တိုးချင်တယ် စသဖြင့် များပြားလှတဲ့ pod တွေထဲက လိုချင်တဲ့ အခြေအနေတစ်ခုအပေါ်မူတည်ပြီး ထိန်းချူပ်ချင်တဲ့အခါ သိပ်ပီး မလွယ်ကူတော့ဘူး။</p>
+<p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/label01.jpg" alt="label01"></p>
+<p>Label ကို pod တစ်ခုတည်းမဟုတ်ပါဘူး kubernetes တခြား resources (node, deployment, service, replicaset, etc,. ) တွေမှာလဲ label ကိုသုံးပါတယ်။ Label ကရိုးရှင်းတယ် key-value အနေနဲ့ resource မှာ သုံးတယ်။ Resource တည်ဆောက်ကတည်းက label ထည့်ပီး ဆောက်သွားလို့ရပါတယ်။ နောက်မှ ထပ်ထည့်ချင်တယ် ရှိပီးသား label ကို ပြင်ချင်တယ်ဆိုလဲ ရပါတယ်။ Resource တစ်ခုမှာ label တစ်ခုထက်ပိုပီး ရှိလို့ရပါတယ်။ Resource ထဲမှာ သတ်မှတ်လိုက်တဲ့ label ကို selector နဲ့ တွဲပီး resource ကိုလိုအပ်သလို သုံးလို့ရပါတယ်။ ရှေ့မှာပြောခဲ့တဲ့ example ကိုပြန်သွားကြည့်ရအောင်။ ပွထနေတဲ့ pod resource တွေကို label ၂ခုစီ ထည့်ကြည့်လိုက်မယ်။ ဘယ် application လဲဆိုတာသိဖို့အတွက် key က app, value က application ရဲ့ short form နဲ့ label တစ်ခု ဘယ် release version လဲဆိုတာသိဖို့အတွက် rel ဆိုတဲ့ key, value ကို release version ဆိုပီး label တစ်ခု ဒီ label ၂ခုစီနဲ့ application တွေကို list လုပ်ကြည့်လို့ရမယ့်ပုံစံကို ပုံမှာတစ်ချက်ကြည့်ကြည့်ရအောင်</p>
+<p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/label02.jpg" alt="label02"></p>
+<p>Label အသုံးပြုလိုက်မယ်ဆိုရင် ရှင်းလင်းပြီး စနစ်တကျ စုစုစည်းစည်းဖြစ်သွားတဲ့ pod တွေကို လွယ်လွယ်ကူကူ manage လုပ်လို့ရပါတယ်</p>
+<p>Resource တည်ဆောက်ကတည်းက Label ကိုသတ်မှတ်လိုရင် manifest ထဲမှာ metadata ေအာက်မှာ label parameter မှာ key-value pair ထည့်ပေးရုံပါပဲ</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+kind: Pod
+metadata:
+   name: label_lab1
+   labels:
+     app: label_lab1
+     env: dev
+spec:
+   containers:
+   - image: ws/lab
+     name: label_lab1
+</code></pre></div><p>pod တစ်ခု create လုပ်လိုက်မယ်</p>
+<pre><code> $ kubectl create -f label_lab1.yaml
+ pod &quot;label_lab1&quot; created
+</code></pre>
+<p><strong>kubectl get pods command</strong> နဲ့ဆိုရင် label ကို မြင်ရမှာ မြင်ရမှာမဟုတ်ပါဘူး။ <strong>&ndash;show-labels</strong> option ထည့်ပေးပီး pod ရဲ့ label ကို တွေ့ရပါမယ်။</p>
+<pre><code>$ kubectl get pods --show-labels
+NAME READY STATUS RESTARTS AGE LABELS
+label_lab1 1/1 Running 0 10m app=label_lab1, env=dev
+</code></pre>
+<p>Pod ေဆာက်ပီးမှ label ထည့်လို့လဲရပါတယ်။</p>
+<pre><code>$ kubectl label pods label_lab1 rel=1.0
+pod &quot;label_lab1&quot; labeled
+
+$ kubectl get pods --show-labels
+NAME READY STATUS RESTARTS AGE LABELS
+label_lab1 1/1 Running 0 16m app=label_lab1, env=debug, rel=1.0
+</code></pre>
+<p>Pod resource ကို filter ပီး လိုသလို manage လုပ်လိုတဲ့အခါမှာ &ndash;selector ဒါမှမဟုတ် -l option သုံးပါတယ်။</p>
+<pre><code>$ kubectl get pods --selector app=label_lab1
+NAME READY STATUS RESTARTS AGE
+label_lab1 1/1 Running 0 27m
+
+$ kubectl get pods -l rel=1.0
+NAME READY STATUS RESTARTS AGE
+label_lab1 1/1 Running 0 27m
+</code></pre>
+<p>Label ကို key ကိုပဲသုံးပီး value မပါပဲနဲ့ ရှာလို့လဲရပါတယ်။</p>
+<pre><code>$ kubectl get pods -l rel
+NAME READY STATUS RESTARTS AGE
+label_lab1 1/1 Running 0 37m
+
+$ kubectl get pods -l '!rel'
+NAME READY STATUS RESTARTS AGE
+kube-manual 1/1 Running 0 1dpodex 1/1 Running 0 1d
+</code></pre>
+<p>Label အကြောင်းကတော့ ဒီလောက်ပါပဲ။ Label ကို kubernetes ရဲ့ တခြား resource တော်တော်များများမှာလဲ ပို၍အသုံးပြုပါတယ်။ Label ကို နားလည်သဘောပေါက်ထားမယ်ဆိုရင် kubernetes resources ေတွကို manage လုပ်ရမှာ ပိုမိုလွယ်ကူစေပါတယ်။<br>
+အချိန်ပေး ဖတ်ရှုပေးသည့်အတွက် ကျေးဇူးတင်ပါတယ်။</p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+        
+        
+            Ye Min
+        
+        
+        <time class="post-date" datetime="2019-12-18T00:00:00Z">
+            18 Dec 2019
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/11/22/creating-pods/">Creating Pods</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/pods3.png" alt="pods"></p>
+<!-- raw HTML omitted -->
+<p>Pods နဲ့ တခြား kubernetes resources တွေကို json သို့မဟုတ် YAML manifest တွေနဲ့ Kubernetes REST API endpoint သို့ post လုပ်ပြီး ဖန်တီးလို့ရနိုင်ပါတယ်။ နောက်တခြား နည်းလမ်းတစ်ခုကတော့ ရိုးရှင်းတဲ့ kubectl run command နဲ့ create လုပ်လို့ရနိုင်ပါတယ်။ kubectl command က အတော်အများ အသုံးဝင် ပေမယ့် တချို့ properties တွေကိုတော့ လုပ်လို့မရပါဘူး၊ limitation တွေ ရှိပါတယ် သို့သော်များလဲ cluster administrator တစ်ယောက် အနေနဲ့ နေ့စဉ် အမြဲ ထိတွေ့နေရတဲ့ အရေးပါတဲ့ နေရာမှာ ရှိပါတယ်။ pod manifest မှာ ဘာတွေ ပါဝင်နိုင်သလဲ ? Pod ရဲ့ အဓိက manifest ကတော့ အပိုင်း ၄ခု ပါဝင်ပါတယ်။ manifest တိုင်းမှာ ပထမဦးစွာ မပါမဖြစ်ပါဝင်တာကတော့ K8s ရဲ့ API version တွေပါ။ API version ဆိုတာ ကတော့ k8s မှာ pod သို့မဟုတ် တခြားသော resource တွေ ကို ဖန်းတီးတဲ့ အခါ မတူညီတဲ့ versions (stable/ Beta/ Alpha) တွေရဲ့ feature တွေကို ကိုယ်ဘာတွေ သုံးချင်လဲ အပေါ်မှာ မူတည်ပြီ ထည့်လို့ရနိုင်ပါတယ်။ ယေဘုယျ အားဖြင့်တော့ ကျွန်တော်တို့တွေ က stable တွေကို သုံးကြပါတယ်၊ stable ကတော့ vX (eg. v1) ဖြစ်ပြီး X ကတော့ အဲနေရာမှာ 1, 2 အစရှိသဖြင့် integer တွေ ဖြစ်ပါတယ်။ ခုနက ပြောသလိုဘဲ API version တစ်ခုနဲ့ တစ်ခုမှာ လုပ်လို့ရတာတွေ၊ လုပ်လို့မရတာတွေ၊ ပိုကောင်းမွန်တဲ့ feature တွေ၊ stable မှာ မရှိတော့တဲ့ deprecate feature တွေ၊ support လုပ်တဲ့ feature တွေ အစရှိသဖြင့် ကွဲပြားခြားနား ပါတယ်။ အသေးစိတ် ကိုတော့ kubernetes ရဲ့ <a href="https://kubernetes.io/docs/concepts/overview/kubernetes-api/">document</a> မှာ ကြည့်နိုင်ပါတယ်။ တခြား ပါဝင်တာတွေကတော့ -</p>
+<ul>
+<li><strong>apiVersion</strong> - ကိုယ္အသုံးျပဳမဲ့ resource ရဲ႕ API version (ေနာက္ပိုင္းတြင္ အေသးစိပ္ ရွင္းျပမည္) အလြတ္သိရမလို၊ doc တြင္ (သို႔) kubectl explain pod ျဖင့္ သိနုိင္သည္။</li>
+<li><strong>kind</strong> - ကိုယ္တည္ေဆာက္မည့္ resource အမ်ိဳးအစား၊ ယခု အခါ တြင္ pod resource ျဖစ္သည္။</li>
+<li><strong>Metadata</strong> - မှာတော့ pod ရဲ့ name, namespace, labels , annotations စတဲ့ တခြား information တွေပါဝင်ပါတယ်။</li>
+<li><strong>Spec</strong> - မှာတော့ တကယ် pod မှာပါဝင်တဲ့ ဖေါ်ပြချက်တွေ ပါဝင်ပါတယ်။ အဲဒါ တွေကတော့ ဘယ် containers တွေ၊ volumes တွေ၊ environment တွေနဲ့ configmap တွေ၊ အစရှိတဲ့ data တွေ ကို ဘယ်လို အသုံးပြုမယ်ဆိုတာတွေ ပါဝင်ပါတယ်။</li>
+<li><strong>Status</strong> - ဒီထဲမှာတော့ လက်ရှိ pod ရဲ့ container တစ်ခုချင်းစီရဲ့ internal IP၊ running ဖြစ်နေလား မဖြစ်နေလား၊ စတဲ့ basic ကျတဲ့ informationတွေ၊ အခြေအနေတွေကို ဖေါ်ပြပေးတဲ့ information တွေ ပါဝင်ပါတယ်။</li>
+</ul>
+<p>ဒါတွေကတော့ pod manifest(definition လို့လည်း ခေါ်တယ်၊ descriptor လို့လည်း ခေါ်တယ်) ရဲ့ အဓိက ပါဝင်တဲ့ အပိုင်း ၄ ပိုင်း ဖြစ်ပါတယ်။ pod ဖန်တီးတဲ့ အခါမှာတော့ နောက်ဆုံးက status ဆိုတဲ့ အပိုင်းကို ထည့်ရေးစရာ မလိုပါဘူး။ status ကတော့ လက်ရှိ cluster ထဲမှာ တည်ဆောက်ထားတဲ့ pod ကို retrieve လုပ်လိုက်တဲ့ အခါမှာ cluster ဘက် အခြမ်းမှ ထုတ်ပြပေးတဲ့ information တွေသာ ဖြစ်ပါတယ်။ တချို့ အခြေနေ တွေမှာ information တွေ သိရဖို့ အသုံးဝင်ပါတယ်။ pod တခုကို ဖန်တီးသည့် အခါ Metadata, Spec တို့ရဲ့ field တွေကို သိရှိနိင်ဖို့ k8s API document တဆင့် သို့မဟုတ် kubectl explain command နဲ့ ဖြစ်နိုင်ခြေရှိတဲ့ API object fields တွေကို လဲ ရှာဖွေလို့ရနိုင်ပါတယ်၊ လွန်စွာ အသုံးဝင်ပါတယ်။</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># A basic pod manifest:</span>
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hola
+spec:
+  containers:
+  - image: quay.io/dther/hola
+    name: hola
+    ports:
+    - containerPort: <span style="color:#ae81ff">8080</span>
+      protocol: TCP
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pod create using kubectl and without yaml manifest</span>
+$ kubectl run hola --image<span style="color:#f92672">=</span>quay.io/dther/hola --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span> --generator<span style="color:#f92672">=</span>run-pod/v1
+pod/hola created
+
+<span style="color:#75715e"># retrieve Pod Object</span>
+$ kubectl get pod
+NAME                                  READY   STATUS    RESTARTS   AGE
+hola                                  1/1     Running   <span style="color:#ae81ff">0</span>          5s
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># retrieve Pod Object detail by name describe with yaml. you can use json also.</span>
+$ kubect get pod hola -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: <span style="color:#e6db74">&#34;2019-11-22T04:20:16Z&#34;</span>
+  labels:
+    run: hola
+  name: hola
+  namespace: default
+  resourceVersion: <span style="color:#e6db74">&#34;23778097&#34;</span>
+  selfLink: /api/v1/namespaces/default/pods/hola
+  uid: 93fc57ec<span style="color:#ae81ff">-4198</span><span style="color:#ae81ff">-4134</span>-8a9e-37901871ea30
+spec:
+  containers:
+  - image: quay.io/dther/hola
+    imagePullPolicy: Always
+    name: hola
+    ports:
+    - containerPort: <span style="color:#ae81ff">8080</span>
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-gll68
+      readOnly: <span style="color:#66d9ef">true</span>
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: <span style="color:#66d9ef">true</span>
+  nodeName: node2
+  priority: <span style="color:#ae81ff">0</span>
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: <span style="color:#ae81ff">30</span>
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: <span style="color:#ae81ff">300</span>
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: <span style="color:#ae81ff">300</span>
+  volumes:
+  - name: default-token-gll68
+    secret:
+      defaultMode: <span style="color:#ae81ff">420</span>
+      secretName: default-token-gll68
+status:
+  conditions:
+  - lastProbeTime: <span style="color:#66d9ef">null</span>
+    lastTransitionTime: <span style="color:#e6db74">&#34;2019-11-22T04:20:34Z&#34;</span>
+    status: <span style="color:#e6db74">&#34;True&#34;</span>
+    type: Initialized
+  - lastProbeTime: <span style="color:#66d9ef">null</span>
+    lastTransitionTime: <span style="color:#e6db74">&#34;2019-11-22T04:20:43Z&#34;</span>
+    status: <span style="color:#e6db74">&#34;True&#34;</span>
+    type: Ready
+  - lastProbeTime: <span style="color:#66d9ef">null</span>
+    lastTransitionTime: <span style="color:#e6db74">&#34;2019-11-22T04:20:43Z&#34;</span>
+    status: <span style="color:#e6db74">&#34;True&#34;</span>
+    type: ContainersReady
+  - lastProbeTime: <span style="color:#66d9ef">null</span>
+    lastTransitionTime: <span style="color:#e6db74">&#34;2019-11-22T04:20:16Z&#34;</span>
+    status: <span style="color:#e6db74">&#34;True&#34;</span>
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://4caa1c5d607621a52bd392068c4386880eb2844070c3476e6e2cf6c90a16ce7d
+    image: quay.io/dther/hola:latest
+    imageID: sha256:b9d148f1a7ff4f1841bbc5a7ac848714eed3310b29643e10a104820a6a21bc94
+    lastState: {}
+    name: hola
+    ready: <span style="color:#66d9ef">true</span>
+    restartCount: <span style="color:#ae81ff">0</span>
+    state:
+      running:
+        startedAt: <span style="color:#e6db74">&#34;2019-11-22T04:20:43Z&#34;</span>
+  hostIP: <span style="color:#ae81ff">10.14</span><span style="color:#ae81ff">.255</span><span style="color:#ae81ff">.11</span>
+  phase: Running
+  podIP: <span style="color:#ae81ff">10.233</span><span style="color:#ae81ff">.96</span><span style="color:#ae81ff">.7</span>
+  qosClass: BestEffort
+  startTime: <span style="color:#e6db74">&#34;2019-11-22T04:20:34Z&#34;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># Explain Pod resource using kubectl explain</span>
+$ kubectl explain pod
+KIND:     Pod
+VERSION:  v1
+
+DESCRIPTION:
+     Pod is a collection of containers that can run on a host. This resource is
+     created by clients and scheduled onto hosts.
+
+FIELDS:
+   apiVersion	&lt;string<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    </span><span style="color:#e6db74"> </span><span style="color:#e6db74">APIVersion defines the versioned schema of this representation of an</span>
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md<span style="color:#75715e">#resources</span>
+
+   kind	&lt;string<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    </span><span style="color:#e6db74"> </span><span style="color:#e6db74">Kind is a string value representing the REST resource this object</span>
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md<span style="color:#75715e">#types-kinds</span>
+
+   metadata	&lt;Object<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    </span><span style="color:#e6db74"> </span><span style="color:#e6db74">Standard object&#39;s metadata. More info:</span>
+     https://git.k8s.io/community/contributors/devel/api-conventions.md<span style="color:#75715e">#metadata</span>
+
+   spec	&lt;Object<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    </span><span style="color:#e6db74"> </span><span style="color:#e6db74">Specification of the desired behavior of the pod. More info:</span>
+     https://git.k8s.io/community/contributors/devel/api-conventions.md<span style="color:#75715e">#spec-and-status</span>
+
+   status	&lt;Object<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    </span><span style="color:#e6db74"> </span><span style="color:#e6db74">Most recently observed status of the pod. This data may not be up to date.</span>
+     Populated by the system. Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md<span style="color:#75715e">#spec-and-status</span>
+
+$ kubectl explain pod.spec <span style="color:#75715e">#### detail    အသုံးပြုနိုင်တဲ့ spec တွေကို တွေ့ရပါမယ်</span>
+</code></pre></div><pre><code>Reference:
+- https://kubernetes.io/docs/reference/
+- https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+- https://kubernetes.io/docs/reference/kubectl/conventions/ 
+</code></pre>
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+        
+        
+            D Ther
+        
+        
+        <time class="post-date" datetime="2019-11-22T00:00:00Z">
+            22 Nov 2019
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/11/22/pods/">pods</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/pods0.png" alt="pods"></p>
+<!-- raw HTML omitted -->
+<p>Pod ဆိုသည်မှာ kubernetes cluster တွင် အသေးငယ်ဆုံးသော deployable units ဖြစ်ပါတယ်။ kubernetes မှာ container တစ်ခုချင်းစီ deploy မလုပ်ဘဲ pod အနေနဲ့သာလျှင် operate လုပ်တယ် deploy လုပ်ကြပါတယ်။ ပြီတော့ pod သည် တစ်ခု၊ တစ်ခုထက် ပိုတဲ့ containers တွေ တနေရာထဲမှာ စုပေါင်းထားတဲ့ အုပ်စု(co-located group လိုမျိုး) တခု ဖြစ်ပြီး kuberntes ရဲ့ basic အကျဆုံး object လဲ ဖြစ်တယ်။ pod တစ်ခုထဲမှာ တစ်ခု သို့မဟုတ် တခုထက် ပိုတဲ့ containers တွေ ပါဝင်နိုင်ပါတယ်။ container တခု ထက် ပိုပါဝင်တဲ့ pod တွေကတော့ kubernetes cluster ရဲ့ နှစ်ခု သို့မဟုတ် နှစ်ခုထက်ပိုတဲ့ node တွေ အပေါ်မှာ ဘယ်တော့မှ မတည်ဆောက်ကြပါဘူး။ pod တွေ ဟာ သီးသန့် ip, hostname, processes အစ ရှိတာတွေ ပါဝင်တဲ့ သီခြား logical machine တွေလို ဖြစ်ပါတယ်။</p>
+<p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/pods1.jpg" alt="pods1"></p>
+<p>pod တစ်ခုထဲမှာ ရှိတဲ့ တစ်ခု ထက်ပိုတဲ့ container (multiple container) တွေ ကတော့ ခုနက ပြောခဲ့တဲ့ တူညီတဲ့ logical machine တစ်ခု ထဲမှာ running လုပ်နေတဲ့ ပုံစံ နဲ့ တူပါတယ်။ ပြောချင်တာကတော့ pod တွေဆိုတာ ကျွန်တော်တို့ သုံးနေတဲ့ vm လိုဘဲ ဒါပေမဲ့ သူက kubernetes cluster ထဲမှာ အသေးဆုံး units တွေဘဲ။ pod တွေ တစ်ခု တစ်ခုထက် ပိုတဲ့  container တွေ ပါဝင်နိုင်ပြီး network/storage စတာတွေကို တော့ share သုံးကြပါတယ်။ ဒီနေ ရာ မှာ စဉ်စားစရာ မေးခွန်းတွေ ရှိပါတယ်။ ဘာကြောင့် ကျွန်တော် တို့က pod တွေကို သုံးဖို့ လိုအပ်တာလဲ ? ဘာကြောင့် containers တွေကို တိုက်ရိုက် အသုံး မပြုနိုင်တာလဲ ? ဘာဖြစ်လို့ ကျွန်တော်တို့က multiple containers တွေကို အတူတကွ run ဖို့ လိုအပ်တာလဲ ? ပြီတော့ process တွေ အာလုံးကို single container ထဲမှာ ထည့် run လို့ရနိုင်ပါသလား ? ဟုတ်ကဲ့ ရနိုင်ပါတယ်။ တချို့ multiple processes ပါဝင်တဲ့ application တစ်ခုက IPC(Inter-Process Communication) မှ တဆင့် သို့မဟုတ် local stored file တွေက နေ တဆင့် processes တွေက ဆက်သွယ်ကြပါတယ်။ အဲလို application မျိုးကို vm ထဲမှာ run ထား အဆင်ပြေနိုင်ပါတယ်။ ဒါပေမဲ့ kubernetes က processes တွေကို containers တွေ ထဲမှာဘဲ run ခိုင်ပြီး container တခုက isolated machine တခုလို ပါဘဲ။ ဒါကြောင့် multiple processes တွေကို single container ထဲမှာ run ဖို့ makes sense ဖြစ်ပါတယ်။ ဒါပေမဲ့ အဲလို run တာဟာ မလုပ်သင့်ပါဘူး။     process တစ်ခု အတွက် container တစ်ခု သာလျှင် အသုံးပြုဖို့ containers တွေက Design လုပ်ထားတာ ဖြစ်ပါတယ်။ multiple processes တွေကို single container တစ်ခုထဲမှာ run ခဲ့မယ်ဆိုရင် အဲဒီ processes တွေ အကုန်လုံး ကောင်းမွန်းစွာ running ဖြစ်နေဖို့ ပိုပြီး တာဝန်ယူရပါမယ် ပြီတော့ ပိုပြီး manage လုပ်ရတာ၊ processes တွေရဲ့ logs တွေ ကြည့်ရတာ၊ single process ကို  restart လုပ်ချင်တာမျိုး၊ အစရှိတာတွေ ပိုပြီး ခက်သွားပါမယ်။ ဒါကြောင့် မလို multiple process တွေကို single container ထဲ run တာ အားမပေးပါဘူး။ ဒါဆိုရင် ကျွန်တော်တို့က အခုလို multiple process တွေကို containers တွေထဲမှာ ခွဲ သုံးမယ်ဆိုရင် containers တွေကို bind ဖို့၊ အတူတကွ single unit အနေနဲ့ manage လုပ်ဖို့ ဒီထက် ကောင်းမွန်းတဲ့ higher-level ပုံစံ တခု လိုအပ်လာပါဘီ။ ဒါကတော့ Pod ပါဘဲ၊ Pod ကို လိုအပ်လာရတဲ့ အကြောင်းပါဘဲ။ Pod တစ်ခုရဲ့ containers တွေကတော့ သက်ဆိုင် ဆက်နွယ်တဲ့ processes တွေကို အနီးကပ် အတူတကွ run ဖို့ရယ် running ဖြစ်နေတဲ့ container တခုချင်းစီး အတွက် မတူညီတဲ့ environment မျိုးကို ထောက်ပံ ပေးပြီး တချို့ အရာတွေကိုတော့ isolate လုပ်ပေးထားပါတယ်။ Pod တစ်ခုထဲမှာ ရှိတဲ့ containers အာလုံးက တူညီတဲ့ Network, UTS namespaces နဲ့ IPC တွေပေါ်မှာ run ကြပါတယ်။ IPC အပေါ်ကနေလဲ တစ်ခုနဲ့ တခု communicate လုပ်နိုင်ပါတယ်။ ပြီတော့ အဲ pod တခု ထဲမှာ ရှိတဲ့ container အားလုံးက တူညီတဲ့ hostname နဲ့ network interfaces တွေကိုလဲ share သုံးကြပါတယ်။ PID တွေတောင် မှ share ပြီး အသုံးပြုနိုင်ကြပါတယ် ဒါပေမဲ့ ဒီ feature ကတော့ cluster ရဲ့ default မှာ မပါဝင်ပါဘူး သီးသန့် enable လုပ်ပေးရမှာ ဖြစ်ပါတယ်။   Pod တစ်ခု ရဲ့ containers တွေရဲ့ filesystem တွေကတော့ container တခုနဲ့ တခု fully isolate ဖြစ်ပါတယ် ဘာလို့လဲ ဆိုတော့ containers တွေရဲ့ filesystem တွေက container images တွေဆီက လာတာမို့ပါ။ ဒါပေမဲ့ တချို့ file တွေ directory တွေကို container တစ်ခုနဲ့ တစ်ခု အထဲမှာ တူညီအောင် သို့မဟုတ် share ဖို့အတွက် ဖြစ်စေ kubernetes ရဲ့ volume ကို အသုံးပြုပြီး mount နိုင်ပါတယ်။ volume အကြောင်းက တော့ နောက်ပိုင် အားရင် ဆက်ရေးပေးပါ့မယ်။     pod တစ်ခုထဲမှာ ရှိတဲ့ containers အားလုံးကတော့ တူညီတဲ့ network namespace အပေါ်မှာ run ကြပြီး တူညီတဲ့ IP address and port space တွေကို share သုံးကြပါတယ်။ ဒါကြောင့် မလို့ တူညီတဲ့ pod တခုထဲမှာ ရှိတဲ့ containers တွေက port conflict မဖြစ်စေရန် တစ်ခုနဲ့ တစ်ခု တူညီတဲ့ port ကို  binding မလုပ်ဖို့ သတိထားဖို့လိုအပ်ပါတယ်။ မတူညီတဲ့ pod တွေကတော့ ဘယ်တော့မှ port conflict မဖြစ်နိုင်ပါဘူး။ ဘာကြောင့်လဲ ဆိုတော့ pod တခုချင်းစီးက သီးသန့် port space ရှိနေလို့ပါဘဲ။ နောက်ပြီး Pod တစ်ခုထဲမှာ ရှိတဲ့ containers အားလုံးမှာ တူညီတဲ့ loopback network interface ရှိပြီး container တစ်ခုကနေ တခြား container တစ်ခုကို localhost ကနေ တဆင့် communicate ပြုလုပ်နိုင်ပါတယ်။ ဒါကတော့ kubernetes ကို အခုမှ စ လေ့ လာဖို့ အတွက် Pod အကြောင်း သိသင့် သလောက် အကျဉ်းချုပ် ဖြစ်ပါတယ်။</p>
+<pre><code>Reference: - https://kubernetes.io/docs/concepts/workloads/pods/pod/
+           - kubernetes in action book
+</code></pre>
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+        
+        
+            D Ther
+        
+        
+        <time class="post-date" datetime="2019-11-22T00:00:00Z">
+            22 Nov 2019
+        </time>
+    </footer>
+</article>
+
+    
+
+    <nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 of 2</span>
+	
+	    <a class="older-posts" href="https://mm-k8s-ug.github.io/page/2/">Older Posts &rarr;</a>
+	
+</nav>
+
+
+</main>
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Myanmar Kubernetes User Group</a> All rights reserved - 2019</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="https://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/syui/hugo-theme-air">hugo-theme-air</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="https://mm-k8s-ug.github.io/js/jquery.js"></script>
+    <script type="text/javascript" src="https://mm-k8s-ug.github.io/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://mm-k8s-ug.github.io/js/index.js"></script>
+    <script src="https://mm-k8s-ug.github.io/js/particles.min.js"></script>
+    <script src="https://mm-k8s-ug.github.io/js/particles.js"></script>  
+
+</body>
+</html>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/post/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/post/2019/12/24/rs/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/post/2019/12/22/rc/</loc>
+    <lastmod>2019-12-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/post/2019/12/18/labels-selectors/</loc>
+    <lastmod>2019-12-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/post/2019/11/22/creating-pods/</loc>
+    <lastmod>2019-11-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/post/2019/11/22/pods/</loc>
+    <lastmod>2019-11-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/post/2019/11/02/k8s-cluster-arch/</loc>
+    <lastmod>2019-11-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://mm-k8s-ug.github.io/tags/</loc>
+  </url>
+  
+</urlset>

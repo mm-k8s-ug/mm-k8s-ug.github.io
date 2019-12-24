@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" Posts &middot;  Myanmar Kubernetes User Group" />
+  	<meta property="og:site_name" content="Myanmar Kubernetes User Group" />
+  	<meta property="og:url" content="https://mm-k8s-ug.github.io/post/" />
+    
+    
+    <meta property="og:type" content="website" />
+    
+
+  <title>
+     Posts &middot;  Myanmar Kubernetes User Group
+  </title>
+
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://mm-k8s-ug.github.io/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://mm-k8s-ug.github.io/images/apple-touch-icon.png" />
+    
+    <link rel="stylesheet" type="text/css" href="https://mm-k8s-ug.github.io/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="https://mm-k8s-ug.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Myanmar Kubernetes User Group" />
+      
+      
+        <link href="https://mm-k8s-ug.github.io/post/index.xml" rel="alternate" type="application/rss+xml" title="Posts &middot; Myanmar Kubernetes User Group" />
+      
+    
+    <meta name="generator" content="Hugo 0.62.0-DEV" />
+
+    <link rel="canonical" href="https://mm-k8s-ug.github.io/post/" />
+
+     
+</head>
+<body class="nav-closed">
+<div id="particles-js"></div>
+  
+
+
+ <div class="site-wrapper">
+
+
+
+
+	<header class="main-header" style="background-image: url(https://mm-k8s-ug.github.io/image/user.png)">
+
+    <nav class="main-nav overlay clearfix">
+      
+      
+        
+          <a class="menu-button icon-feed" href="https://mm-k8s-ug.github.io/post/index.xml">&nbsp;&nbsp;Subscribe</a>
+        
+      
+    </nav>
+    <div class="vertical">
+
+        <div class="main-header-content inner">
+            <h1 class="page-title">
+
+              <a class="btn-bootstrap-2" href="#content">Myanmar Kubernetes User Group</a>
+          </h1>
+        </div>
+</div>
+    <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+</header>
+
+<main id="content" class="content" role="main">
+    
+    
+    
+    
+
+	<div class="extra-pagination inner">
+    <nav class="pagination" role="navigation">
+	
+	    <a class="newer-posts" href="https://mm-k8s-ug.github.io/post/">&larr; Newer Posts</a>
+	
+	<span class="page-number">Page 2 of 2</span>
+	
+</nav>
+
+	</div>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://mm-k8s-ug.github.io/post/2019/11/02/k8s-cluster-arch/">K8s Cluster Achitecture အကြမ်းဖျင်း </a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/k8s-cluster-arch00.png" alt="pods"></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><strong>Computer cluster - a group of loosely coupled computers that work together(wiki)</strong>. cluster ဆိုသည်မှာ အကြမ်းဖျင်း ပြောရရင် အလုပ်တွေကို အတူတကွ တွဲလုပ်ဖို့ physical machine သို့ မဟုတ် VM စတဲ့ ကွန်ပျူတာ အစုအဝေး တစ်ခု ဖြစ်တယ်။ cluster တွေမှာ ယေဘုယျ အားဖြင့် master ရယ်၊ minion တွေ ရယ် ဆိုပြီး ရှိကြတယ်။ Kubernetes cluster တွင်လဲ ထိုနည်းတူ master node ရယ် worker node(minion) တွေ ပါဝင်ကြပါတယ် တချို့ကြတော့လည်း လိုအပ်ချက် အပေါ် မူတည်ပြီ infra node ဆိုပြီး ထပ်ခွဲအသုံး ပြုကြပါသေးတယ်။ အဲတော့ master node ဆိုတာ ဘာလဲ ဘာ components တွေ ပါဝင်သလဲ ? worker node ဆိုတာ ဘာလဲ ဘာ components တွေပါဝင်သလဲ ? ရိုးရိုးရှင်းရှင်းပြောရရင် တော့ master node က kubernetes system ရဲ့ Control Plane ဖြစ်ပြီး cluster တစ်ခုလုံးကို control နဲ့ manage လုပ်ပေးပါတယ်။ worker node ကတော့ ကျွန်တော်တို့ လိုချင်တဲ့ တကယ် applications တွေ ကို worker node အပေါ်မှာ deploy လုပ်ကြပါတယ်။</p>
+<h2 id="master-control-plane----components---------">Master (Control Plane) မှာ အကြမ်းဖျင်း အဓိက components ၄ ခု က မပါမဖြစ် ပါဝင်ပြီး အရေးကြီးပါတယ်။ ဒါတွေကတော့ -</h2>
+<ul>
+<li><strong>API Server</strong> - API server ကတော့ cluster အတွင်း(master/worker) ထဲမှာ ရှိတဲ့ components တွေ နဲ့ k8s cluster client တွေ ကြား အဓိက ဆက်သွယ်ပေးတဲ့ components တစ်ခုဖြစ်ပါတယ်။ အလွယ် ပြောရရင်တော့ communication လုပ်ပေးတဲ့ အရာပေါ့။</li>
+<li><strong>Controller Manager</strong> - ဒါကတော့ controllers တွေ များစွာ ပါဝင်ပြီ cluster level အလုပ်တွေ functions တွေကို လုပ်ပါတယ်။ ဘာတွေလုပ်သလဲ ဆိုရင်တော့ အကြမ်းဖျင်း ပြောရရင် replication အလုပ်တွေ၊ worker nodes တွေရဲ့ အခြေနေ စောင့်ကြည့်တာတွေ၊ ဘယ် worker nodes က failures ဖြစ်သွားတဲ့ အခြေနေမျိုးကို ကိုင်တွယ် ဖြေရှင်းခြင်း အစရှိတဲ့ အလုပ်တွေကို လုပ်ပေးပါတယ်။</li>
+<li><strong>Scheduler</strong> - ဒါကတော့ application တွေကို deploy လုပ်တဲ့ အခါ ဘယ် worker တွေ အပေါ်ကို သွားပြီး deploy လုပ်ရမယ် သို့မဟုတ် ဘယ် worker node တွေက deploy လုပ်မယ့် application တွေ အတွက် သင့်လျော်တယ်ဆိုတာမျိုးကို ပြုလုပ်ပေးတဲ့ အရာ မျိုးပေါ့။ သူ့ အလုပ်ကတော့ အလွယ်တကူမှတ်ရင် assign ချတာ၊ နေရာ ချရတာနဲ့ တူတယ်။</li>
+<li><strong>etcd</strong> - သူကတော့ k8s cluster ကြီး တစ်ခုလုံးရဲ့ configuration တွေ ကို persistently စိတ်ချစွာ (distributed) သိုလှောင်းထားတဲ့ အရာ ဖြစ်ပါတယ်။ ဥပမာ k8s cluster က application ဆိုရင် သူက အဲ့ application ရဲ့ backend database လိုမျိုးပေါ့။</li>
+</ul>
+<h2 id="worker-node-minion-----components-------">Worker node (minion) မှာ အကြမ်းဖျင်း အဓိက အရေးကြီးတဲ့ components ၃ ခု မဖြစ်မနေ ပါဝင်ပါတယ်။ ဒါတွေကတော့ -</h2>
+<ul>
+<li>
+<p><strong>Container runtime</strong> - ဒါကတော့ node အပေါ်မှာ applications တွေကို container image ကနေ container အနေနဲ့ တကယ် run မဲ့ container runtime ဖြစ်ပါတယ်၊ ဥပမာ docker, rkt, containerd အစ ရှိတာတွေဖြစ်ပါတယ်။</p>
+</li>
+<li>
+<p><strong>Kubelet</strong> - kubelet က master node မှာ ရှိတဲ့ api server နဲ့ ဆက်သွယ်ပြီး node အပေါ် container တွေကို ဘယ်လို run မည်ကို manages လုပ်ပေးပါတယ်။ အလွယ်ပြောရရင်တော့ docker တို့ rkt တို့ကို api ကနေ container ကို ဘယ်လို run ပါဆိုပြီ api server က လာသည့် အမိန့်အတိုင်း ပြန် ခိုင်းပေးတဲ့ အကောင်နဲ့ တူတယ်။</p>
+</li>
+<li>
+<p><strong>Kube-proxy</strong> - သူကတော့ deploy လုပ်လိုက်တဲ့ applications တွေရဲ့ network traffic တွေကို ကိုင်တွယ်ပေးတဲ့ အရာ၊ load-balances လုပ်ပေးတဲ့ အရာ ဖြစ်တယ်။</p>
+<p>ဒါတွေက တော့ k8s cluster ရဲ့ architecture အကြမ်းဖျင်း ဖြစ်တယ်။</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/mm-k8s-ug/mm-k8s-ug.github.io/master/images/k8s-cluster-arch01.jpg" alt="pods1"></p>
+<pre><code>Reference: - https://kubernetes.io/docs/
+           - kubernetes in action book
+</code></pre>
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+        
+        
+            D Ther
+        
+        
+        <time class="post-date" datetime="2019-11-02T00:00:00Z">
+            2 Nov 2019
+        </time>
+    </footer>
+</article>
+
+	
+
+	<nav class="pagination" role="navigation">
+	
+	    <a class="newer-posts" href="https://mm-k8s-ug.github.io/post/">&larr; Newer Posts</a>
+	
+	<span class="page-number">Page 2 of 2</span>
+	
+</nav>
+
+</main>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Myanmar Kubernetes User Group</a> All rights reserved - 2019</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="https://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/syui/hugo-theme-air">hugo-theme-air</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="https://mm-k8s-ug.github.io/js/jquery.js"></script>
+    <script type="text/javascript" src="https://mm-k8s-ug.github.io/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://mm-k8s-ug.github.io/js/index.js"></script>
+    <script src="https://mm-k8s-ug.github.io/js/particles.min.js"></script>
+    <script src="https://mm-k8s-ug.github.io/js/particles.js"></script>  
+
+</body>
+</html>
+
